@@ -15,7 +15,7 @@ const Login = () => {
     if (email) {
       //go to dashboard
     } else {
-      // show error msg
+      // show error msgs
       setErrorMsg("PLease Provide a Valid Email");
     }
   };
