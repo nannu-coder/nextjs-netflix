@@ -4,7 +4,6 @@ import styles from "./cardSection.module.css";
 
 const CardSection = (props) => {
   const { title, videos, size } = props;
-  console.log(videos);
 
   return (
     <section className={styles.container}>
