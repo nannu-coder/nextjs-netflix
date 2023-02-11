@@ -3,23 +3,27 @@ import styles from "@/styles/Home.module.css";
 import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/nav/Navbar";
 import CardSection from "@/components/Card/CardSection";
+import { getPopularVideos, getVideos } from "@/lib/videos";
 
-export default function Home() {
-  const disneVideos = [
-    {
-      imgUrl: "/static/clifford.webp",
-    },
-    {
-      imgUrl: "/static/clifford.webp",
-    },
-    {
-      imgUrl: "/static/clifford.webp",
-    },
-    {
-      imgUrl: "/static/clifford.webp",
-    },
-  ];
+// This gets called on every request
+export async function getServerSideProps() {
+  const disneVideos = await getVideos("disney trailer");
+  const travelVideos = await getVideos("travel");
+  const productivityVideos = await getVideos("productivity");
+  const popularVideos = await getPopularVideos();
 
+  // Pass data to the Home via props
+  return {
+    props: { disneVideos, travelVideos, productivityVideos, popularVideos },
+  };
+}
+
+export default function Home({
+  disneVideos,
+  travelVideos,
+  productivityVideos,
+  popularVideos,
+}) {
   return (
     <>
       <Head>
@@ -38,7 +42,13 @@ export default function Home() {
 
         <div className={styles.sectionWrapper}>
           <CardSection title="Disney" videos={disneVideos} size="large" />
-          <CardSection title="Productive" videos={disneVideos} size="medium" />
+          <CardSection title="Travel" videos={travelVideos} size="small" />
+          <CardSection
+            title="Productivity"
+            videos={productivityVideos}
+            size="medium"
+          />
+          <CardSection title="Popular" videos={popularVideos} size="small" />
         </div>
       </main>
     </>
