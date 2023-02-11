@@ -1,12 +1,25 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Banner from "@/components/Banner/Banner";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "@/components/nav/Navbar";
+import CardSection from "@/components/Card/CardSection";
 
 export default function Home() {
+  const disneVideos = [
+    {
+      imgUrl: "/static/clifford.webp",
+    },
+    {
+      imgUrl: "/static/clifford.webp",
+    },
+    {
+      imgUrl: "/static/clifford.webp",
+    },
+    {
+      imgUrl: "/static/clifford.webp",
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -16,8 +29,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h2>Welcome To Nextjs</h2>
-        <Banner />
+        <Navbar username="test@test.com" />
+        <Banner
+          title="Clifford The Red Dog"
+          subtitle="The very Cute Dog"
+          imgUrl="/static/clifford.webp"
+        />
+
+        <div className={styles.sectionWrapper}>
+          <CardSection title="Disney" videos={disneVideos} size="large" />
+          <CardSection title="Productive" videos={disneVideos} size="medium" />
+        </div>
       </main>
     </>
   );
