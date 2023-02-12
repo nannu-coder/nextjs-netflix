@@ -38,10 +38,15 @@ export default function Home({
           title="Clifford The Red Dog"
           subtitle="The very Cute Dog"
           imgUrl="/static/clifford.webp"
+          videoId="8pDqJVdNa44"
         />
 
         <div className={styles.sectionWrapper}>
-          <CardSection title="Disney" videos={disneVideos} size="large" />
+          <CardSection
+            title="Disney"
+            videos={disneVideos ? disneVideos : null}
+            size="large"
+          />
           <CardSection title="Travel" videos={travelVideos} size="small" />
           <CardSection
             title="Productivity"
