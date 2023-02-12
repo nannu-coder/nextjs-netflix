@@ -14,27 +14,18 @@ export async function getStaticProps() {
     props: {
       video: videoArray.length > 0 ? videoArray[0] : {},
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 10 seconds
+
     revalidate: 10, // In seconds
   };
 }
 
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// the path has not been generated.
 export async function getStaticPaths() {
   const listOfVideos = ["8pDqJVdNa44", "V2efVSXSlqc", "Fkjps8Tcooo"];
 
-  // Get the paths we want to pre-render based on posts
   const paths = listOfVideos.map((video) => ({
     params: { video },
   }));
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
   return { paths, fallback: "blocking" };
 }
 
