@@ -26,12 +26,7 @@ const Card = (props) => {
         className={cls(styles.imgMotionWrapper, clsMap[size])}
         whileHover={scale}
       >
-        <Image
-          src={imgSrc}
-          alt="image"
-          layout="fill"
-          onError={handleImgError}
-        />
+        <Image src={imgSrc} alt="image" onError={handleImgError} />
       </motion.div>
     </div>
   );

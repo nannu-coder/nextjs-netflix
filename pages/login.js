@@ -1,3 +1,4 @@
+import { magic } from "@/lib/magic-client";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +11,20 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const router = useRouter();
 
-  const handleLoginWithEmail = (e) => {
+  const handleLoginWithEmail = async (e) => {
     e.preventDefault();
     if (email) {
-      //go to dashboard
+      // log in a user by their email
+      try {
+        const didToken = await magic.auth.loginWithMagicLink({ email });
+        console.log(didToken);
+        if (didToken) {
+          router.push("/");
+        }
+      } catch (error) {
+        // Handle errors if required!
+        console.error("SOmething Went Wrong", error);
+      }
     } else {
       // show error msgs
       setErrorMsg("PLease Provide a Valid Email");
