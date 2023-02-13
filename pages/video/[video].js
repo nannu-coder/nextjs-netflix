@@ -1,3 +1,4 @@
+import Navbar from "@/components/nav/Navbar";
 import { getVideoById } from "@/lib/videos";
 import clsx from "classnames";
 import { useRouter } from "next/router";
@@ -5,10 +6,9 @@ import Modal from "react-modal";
 Modal.setAppElement("#__next");
 import styles from "../../styles/video.module.css";
 
-export async function getStaticProps() {
-  const videoId = "V2efVSXSlqc";
-  const videoArray = getVideoById(videoId);
-  console.log(videoArray);
+export async function getStaticProps(context) {
+  const videoId = context.params.video;
+  const videoArray = await getVideoById(videoId);
 
   return {
     props: {
@@ -40,6 +40,8 @@ const Video = ({ video }) => {
 
   return (
     <div className={styles.container}>
+      <Navbar />
+
       <Modal
         isOpen={true}
         onRequestClose={() => {}}
